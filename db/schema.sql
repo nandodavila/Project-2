@@ -1,3 +1,3 @@
-DROP DATABASE IF EXISTS wish-list_db;
+DROP DATABASE IF EXISTS wishlist_db;
 
-CREATE DATABASE wish-list_db;
+CREATE DATABASE wishlist_db;
