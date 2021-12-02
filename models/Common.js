@@ -27,6 +27,14 @@ Common.init({
     type: DataTypes.STRING,
     allowNull: true,
   },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+    references: {
+      model: 'user',
+      key: 'id',
+    },
+  },
   sequelize,
   timestamps: false,
   freezeTableName: true,
