@@ -3,6 +3,7 @@ const sequelize = require('../config/connection');
 
 class CommonList extends Model {};
 
+
 CommonList.init(
   {
     id: {
