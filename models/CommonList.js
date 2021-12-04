@@ -28,7 +28,7 @@ CommonList.init({
   },
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
     references: {
       model: 'user',
       key: 'id',

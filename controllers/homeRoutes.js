@@ -23,10 +23,10 @@ router.get('/search/:username', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     const commonListData = await CommonList.findAll();
-    const commonList = commonListData.map((item) => item.get({ plain: true }));
+    const commonLists = commonListData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
     res.render('homepage', {
-      commonList,
+      commonLists
     });
   } catch (err) {
     res.status(500).json(err);
