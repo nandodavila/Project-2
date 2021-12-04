@@ -1,10 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Common extends Model {}
-// middleware in brackets later
+class UserList extends Model {};
 
-Common.init({
+UserList.init({
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -35,9 +34,19 @@ Common.init({
       key: 'id',
     },
   },
+  common_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'commonlist',
+      key: 'id',
+    },
+  },
   sequelize,
   timestamps: false,
   freezeTableName: true,
   underscored: true,
-  modelName: 'common',
+  modelName: 'userlist',
 });
+
+module.exports = UserList;
