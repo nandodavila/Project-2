@@ -1,5 +1,10 @@
+{{#if logged_in}}
+
+
+{{else}}
 {{#each commons as |common|}}
-<div class="card mb-3" >
+<main class="container container-fluid mt-5"></main>
+    <div class="card mb-3" >
       <div class="row g-0">
         <div class="col-md-2">
           <img src="{{common.img_link}}" class="img-fluid rounded-start" alt="...">
@@ -18,4 +23,6 @@
         </div>
       </div>
     </div>
+</main>
 {{/each}}
+{{/if}}
