@@ -1,9 +1,56 @@
 {{#if logged_in}}
-
-
+  <div class="container-fluid">
+    <div class="row row-cols-3">
+      <div class="col-4">
+        {{#each commons as |common|}}
+        <div class="card mb-3" >
+          <div class="row g-0">
+            <div class="col-md-2">
+              <img src="{{common.img_link}}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h5 class="card-title">{{common.item_name}}</h5>
+                <p class="card-text">{{common.description}}</p>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card-body"></div>
+                <a href="{{common.purchase_link}}">Link to purchase</a>
+                <p class="card-text"><small class="text-muted">Added by: {{common.user.username}}</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      <div class="col-4">
+        {{#each userLists as |userList|}}
+          <div class="card mb-3" >
+            <div class="row g-0">
+              <div class="col-md-2">
+                <img src="{{userList.img_link}}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title">{{userList.item_name}}</h5>
+                  <p class="card-text">{{userList.description}}</p>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card-body"></div>
+                  <a href="{{userList.purchase_link}}">Link to purchase</a>
+                  <p class="card-text"><small class="text-muted">Added by: {{userList.user.username}}</small></p>
+                </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-4">
+        Column
+      </div>
+    </div>
+  </div>
 {{else}}
 {{#each commons as |common|}}
-<main class="container container-fluid mt-5"></main>
+<main class="container container-fluid mt-5">
     <div class="card mb-3" >
       <div class="row g-0">
         <div class="col-md-2">
