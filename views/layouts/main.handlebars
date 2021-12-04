@@ -60,10 +60,10 @@
         </div>
       </div>
     </nav>
-    <main>
+    <main class="container container-fluid mt-5">
       {{body}}
     </main>
-    {{#if loggen_in}}
+    {{#if logged_in}}
     <script src="/js/logout.js"></script>
     {{/if}}
 
