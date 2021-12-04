@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class UserList extends Model {}
+class UserList extends Model {};
 
 UserList.init({
   id: {
@@ -31,6 +31,14 @@ UserList.init({
     allowNull: true,
     references: {
       model: 'user',
+      key: 'id',
+    },
+  },
+  common_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'commonlist',
       key: 'id',
     },
   },
