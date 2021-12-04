@@ -1,12 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
-const bcrypt = require('bcrypt');
 
-class Common extends Model {
-  
-}
+class CommonList extends Model {}
 
-Common.init({
+CommonList.init({
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -41,5 +38,7 @@ Common.init({
   timestamps: false,
   freezeTableName: true,
   underscored: true,
-  modelName: 'common',
+  modelName: 'commonlist',
 });
+
+module.exports = CommonList;
