@@ -2,6 +2,14 @@
   <div class="container-fluid">
     <div class="row row-cols-3">
       <div class="col-4">
+        <div class="card m-2">
+          <div class="card-header">
+            <h4>The Wish List!</h4>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Click add to add items to your personal list!</h5>
+          </div>
+        </div>
         {{#each commonLists as |commonList|}}
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
@@ -31,6 +39,14 @@
         </div>
         {{/each}}
       <div class="col-4">
+        <div class="card m-2">
+          <div class="card-header">
+            <h4>Your Wish List!</h4>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Click edit to edit or delete items to your personal list.</h5>
+          </div>
+        </div>
         {{#each userLists as |userList|}}
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
