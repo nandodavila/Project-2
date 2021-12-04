@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../models');
+const { User, CommonList } = require('../models');
 
 router.get('/search/user/:id', async (req, res) => {
   try {
@@ -16,13 +16,26 @@ router.get('/search/user/:id', async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => {
+router.get('/', async (req, res) => {
+  try {
+    const commonListData = await CommonList.findAll();
+    const commonList = commonListData.map((item) => item.get({ plain: true }));
+    //Change handlebars file name
+    res.render('homepage', {
+      commonList,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
     return;
   }
 
-  res.render('login');
+  res.render('login-signup');
 });
 
 module.exports = router;
