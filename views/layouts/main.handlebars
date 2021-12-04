@@ -48,9 +48,10 @@
             </li>
             {{/if}}
           </ul>
-          <form class='d-flex'>
+          <form class='d-flex search-form'>
             <input
               class='form-control me-2'
+              id='search-input'
               type='search'
               placeholder='Search for users'
               aria-label='Search'
@@ -60,6 +61,8 @@
         </div>
       </div>
     </nav>
+    <script src="/js/search.js"></script>
+
     {{{body}}}
     
     {{#if logged_in}}

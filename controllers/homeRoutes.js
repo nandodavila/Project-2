@@ -1,17 +1,23 @@
 const router = require('express').Router();
 const { User, CommonList } = require('../models');
 
-router.get('/search/:username', async (req, res) => {
+router.get('/:username', async (req, res) => {
   try {
+    console.log(req.params.username)
     const userData = await User.findAll({
       where: {
         username: req.params.username
       },
     });
+    console.log(userData)
 
     const user = userData.map((user) => user.get({ plain: true }));
+    console.log(user)
+    // res.status(200).res.json(user)
 
-    //Might Change handlebars file name
+    // res.redirect('/login-signup')
+
+    // Might Change handlebars file name
     res.render('otheruser', {
       user,
     });
