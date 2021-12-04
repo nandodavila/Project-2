@@ -2,23 +2,23 @@
   <div class="container-fluid">
     <div class="row row-cols-3">
       <div class="col-4">
-        {{#each commons as |common|}}
+        {{#each commonLists as |commonList|}}
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="{{common.img_link}}" class="img-fluid rounded-start" alt="..." />
+              <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{common.item_name}}</h5>
-                <p class="card-text">{{common.description}}</p>
+                <h5 class="card-title">{{commonList.item_name}}</h5>
+                <p class="card-text">{{commonList.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="{{common.purchase_link}}">Purchase Link</a>
+                <a href="{{commonList.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: {{common.user.name}}</small>
+                  <small class="text-muted">Added by: {{commonList.user.name}}</small>
                 </p>
               </div>
             </div>
@@ -71,23 +71,23 @@
     </div>
   </div>
 {{else}}
-{{#each commons as |common|}}
+{{#each commonLists as |commonList|}}
 <main class="container container-fluid mt-5">
     <div class="card mb-3" >
       <div class="row g-0">
         <div class="col-md-2">
-          <img src="{{common.img_link}}" class="img-fluid rounded-start" alt="...">
+          <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-6">
           <div class="card-body">
-            <h5 class="card-title">{{common.item_name}}</h5>
-            <p class="card-text">{{common.description}}</p>
+            <h5 class="card-title">{{commonList.item_name}}</h5>
+            <p class="card-text">{{commonList.description}}</p>
           </div>
         </div>
         <div class="col-md-2">
           <div class="card-body">
-            <a href="{{common.purchase_link}}">Purchase Link</a>
-            <p class="card-text"><small class="text-muted">Added by: {{common.user.username}}</small></p>
+            <a href="{{commonList.purchase_link}}">Purchase Link</a>
+            <p class="card-text"><small class="text-muted">Added by: {{commonList.user.username}}</small></p>
           </div>
         </div>
       </div>
