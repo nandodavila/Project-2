@@ -6,14 +6,14 @@ const searchFormHandler = async (event) => {
   
     if (search) {
       // Send a POST request to the API endpoint
-      const response = await fetch(`/search/${search}`, {
+      const response = await fetch(`/${search}`, {
         method: 'GET',
       });
       console.log(response)
   
       if (response.ok) {
         // Add users url location later, if by ID or username to be determined 
-        document.location.replace('/');
+        document.location.replace(`/${search}`);
       } else {
         alert(`${response.statusText}  No user found with that username, please try again` );
       }
