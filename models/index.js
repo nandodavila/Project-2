@@ -18,7 +18,7 @@ User.hasMany(CommonList, {
     foreignKey: "user_id"
 });
 
-UserList.hasOne(CommonList, {
+UserList.hasMany(CommonList, {
   foreignKey: "common_id"
 });
 
