@@ -1,9 +1,13 @@
 const router = require('express').Router();
 const { User } = require('../models');
 
-router.get('/search/user/:id', async (req, res) => {
+router.get('/search/:username', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id);
+    const userData = await User.findAll({
+      where: {
+        username: req.params.username
+      },
+    });
 
     const user = userData.map((user) => user.get({ plain: true }));
 

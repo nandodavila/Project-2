@@ -8,7 +8,8 @@ class User extends Model {
   }
 };
 
-User.init({
+User.init(
+  {
   id: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -35,7 +36,10 @@ User.init({
     },
   },
 },
- { hooks: {
+
+{
+  hooks: {
+
     beforeCreate: async (newUserData) => {
       newUserData.password = await bcrypt.hash(newUserData.password, 10);
       return newUserData;
