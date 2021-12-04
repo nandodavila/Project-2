@@ -25,3 +25,5 @@ UserList.hasMany(CommonList, {
 CommonList.hasMany(UserList, {
     foreignKey: "common_id"
 });
+
+module.exports = { User, CommonList, UserList };
