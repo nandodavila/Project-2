@@ -1,18 +1,12 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { CommonList } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-router.post('/', async (req, res) => {
+router.post('/', withAuth , async (req, res) => {
   try {
-    const userData = await User.create(req.body);
-
-    req.session.save(() => {
-      req.session.user_id = userData.id;
-      req.session.logged_in = true;
-
-      res.status(200).json(userData);
-    });
-  } catch (err) {
+    const commonLists = await CommonList.create(req.body);
+    res.status(200).json(commonLists);
+    } catch (err) {
     res.status(400).json(err);
   }
 });
