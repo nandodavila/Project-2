@@ -38,43 +38,55 @@
       </div>
     </div>
   </nav>
-  <div class="container mt-5">
+
+
+  <div class="container mt-5 " >
     <form>
-      <!-- Name input -->
-      <div class="form-outline mb-4">
-        <input type="text" id="form4Example1" class="form-control" />
-        <label class="form-label" for="form4Example1">Name</label>
+
+      <div class="card bg-primary text-white mb-4">
+        <div class="card-body">Add an item!</div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-sm-2 col-form-label" for="purchase-link">Link to the item</label>
+        <div class="col-sm-10">
+        <input type="text" id="purchase-link" class="form-control" />
+        </div>
+      </div>
+
+      <div class="card bg-info text-white mb-4">
+        <div class="card-body">Optional</div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-sm-2 col-form-label" for="item-name">Item Name</label>
+        <div class="col-sm-10">
+        <input type="email" id="item-name" class="form-control" />
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-sm-2 col-form-label" for="item-description">Item Description</label>
+        <div class="col-sm-10">
+        <textarea class="form-control" id="item-description" rows="4"></textarea>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label class="col-sm-2 col-form-label" for="image-link">Link to image for item</label>
+        <div class="col-sm-10">
+        <input type="email" id="image-link" class="form-control" />
+        </div>
       </div>
     
-      <!-- Email input -->
-      <div class="form-outline mb-4">
-        <input type="email" id="form4Example2" class="form-control" />
-        <label class="form-label" for="form4Example2">Email address</label>
+      <div class="text-center">
+      <button type="submit" class="btn btn-primary btn-block mb-4" id="submit">Submit Item</button>
       </div>
     
-      <!-- Message input -->
-      <div class="form-outline mb-4">
-        <textarea class="form-control" id="form4Example3" rows="4"></textarea>
-        <label class="form-label" for="form4Example3">Message</label>
-      </div>
-    
-      <!-- Checkbox -->
-      <div class="form-check d-flex justify-content-center mb-4">
-        <input
-          class="form-check-input me-2"
-          type="checkbox"
-          value=""
-          id="form4Example4"
-          checked
-        />
-        <label class="form-check-label" for="form4Example4">
-          Send me a copy of this message
-        </label>
-      </div>
-    
-      <!-- Submit button -->
-      <button type="submit" class="btn btn-primary btn-block mb-4">Send</button>
     </form>
   </div>
+
   </body>
+
+
 </html>
