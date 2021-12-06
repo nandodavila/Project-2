@@ -12,8 +12,22 @@ router.get('/', async (req, res) => {
       ],
     });
     const commonLists = commonListData.map((items) => items.get({ plain: true }));
+
+    const userListData = await CommonList.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
+    })
+
+    const userLists = userListData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
     res.render('homepage', {
+      userLists,
       commonLists,
       logged_in: req.session.logged_in,
       name: req.session.username
