@@ -1,6 +1,51 @@
 const router = require('express').Router();
 const { User, ListItem, Item } = require('../models');
 
+
+router.get('/', async (req, res) => {
+  try {
+    const commonListData = await CommonList.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+    const commonLists = commonListData.map((items) => items.get({ plain: true }));
+
+    const userListData = await CommonList.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
+    })
+
+    const userLists = userListData.map((items) => items.get({ plain: true }));
+    //Change handlebars file name
+    res.render('homepage', {
+      userLists,
+      commonLists,
+      logged_in: req.session.logged_in,
+      name: req.session.username
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get('/login-signup', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login-signup');
+});
+
 router.get('/:username', async (req, res) => {
   try {
     const userData = await User.findAll({
@@ -22,6 +67,7 @@ router.get('/:username', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 router.get('/', async (req, res) => {
   try {

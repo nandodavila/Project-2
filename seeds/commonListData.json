@@ -1,14 +1,17 @@
 [
     {
       "item_name": "MacBook Air",
-      "description": "Super fast, super light, ... super expensive. "
+      "description": "Super fast, super light, ... super expensive. ",
+      "img_link": "https://picsum.photos/200"
     },
     {
       "item_name": "iPhone 13",
-      "description": "Best iPhone yet!"
+      "description": "Best iPhone yet!",
+      "img_link": "https://picsum.photos/200"
     },
     {
       "item_name": "Apple Watch SE",
-      "description": "Great for the gym"
+      "description": "Great for the gym",
+      "img_link": "https://picsum.photos/200"
     }
 ]

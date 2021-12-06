@@ -26,6 +26,7 @@
               <div class="card-body">
                 <a href="{{item.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
+
                   <small class="text-muted">Added by: {{item.user.name}}</small>
                 </p>
               </div>
@@ -38,6 +39,7 @@
           </div>
         </div>
         {{/each}}
+      </div>
       <div class="col-4">
         <div class="card m-2">
           <div class="card-header">
@@ -79,7 +81,7 @@
       <div class="col-4">
         <div class="card">
           <div class="card-body d-flex flex-column justify-content-center">
-            <h5 class="card-title text-center">{{user.username}}</h5>
+            <h5 class="card-title text-center">{{name}}</h5>
             <a href="/additem" class="btn btn-primary">Add an item</a>
           </div>
         </div>
