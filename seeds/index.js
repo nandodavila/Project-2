@@ -1,11 +1,11 @@
 const sequelize = require('../config/connection');
-const UserList = require('../models/UserList');
+const List = require('../models/List');
 const User = require('../models/User');
-const CommonList = require('../models/CommonList');
+const Item = require('../models/Item');
 
 
 const userData = require('./userData.json');
-const commonListData = require('./commonListData.json');
+const itemData = require('./itemData.json');
 
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
@@ -15,8 +15,8 @@ const seedDatabase = async () => {
     returning: true,
   });
 
-  for (const list of commonListData) {
-    await CommonList.create({
+  for (const list of itemData) {
+    await Item.create({
       ...list,
       user_id: users[Math.floor(Math.random() * users.length)].id,
     });

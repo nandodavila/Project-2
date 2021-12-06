@@ -1,32 +1,32 @@
 const User = require('./User');
-const UserList = require('./UserList');
-const CommonList = require('./CommonList');
-const CommonUser = require('./CommonUser');
+const List = require('./List');
+const Item = require('./Item');
+const ListItem = require('./ListItem');
 
-User.hasOne(UserList, {
+User.hasOne(List, {
   foreignKey: "user_id"
 })
 
-UserList.belongsTo(User, {
+List.belongsTo(User, {
   foreignKey: "user_id"
 })
 
-CommonList.belongsTo(User, {
+Item.belongsTo(User, {
   foreignKey: "user_id"
 })
 
-User.hasMany(CommonList, {
+User.hasMany(Item, {
   foreignKey: "user_id"
 })
 
-CommonList.belongsToMany(UserList, {
-  through: "commonuser",
-  foreignKey: "commonlist_id"
+Item.belongsToMany(List, {
+  through: "listitem",
+  foreignKey: "item_id"
 })
 
-UserList.belongsToMany(CommonList, {
-  through: "commonuser",
-  foreignKey: 'userlist_id'
+List.belongsToMany(Item, {
+  through: "listitem",
+  foreignKey: 'list_id'
 })
 
-module.exports = { User, CommonList, UserList, CommonUser };
+module.exports = { User, Item, List, ListItem };
