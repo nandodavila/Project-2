@@ -4,12 +4,33 @@ const { User, CommonList } = require('../models');
 
 router.get('/', async (req, res) => {
   try {
-    const commonListData = await CommonList.findAll();
+    const commonListData = await CommonList.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
     const commonLists = commonListData.map((items) => items.get({ plain: true }));
+
+    const userListData = await CommonList.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
+    })
+
+    const userLists = userListData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
     res.render('homepage', {
+      userLists,
       commonLists,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
+      name: req.session.username
     });
   } catch (err) {
     res.status(500).json(err);
