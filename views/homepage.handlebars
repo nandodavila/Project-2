@@ -10,23 +10,23 @@
             <h5 class="card-title">Click add to add items to your personal list!</h5>
           </div>
         </div>
-        {{#each commonLists as |commonList|}}
+        {{#each items as |item|}}
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="..." />
+              <img src="{{item.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{commonList.item_name}}</h5>
-                <p class="card-text">{{commonList.description}}</p>
+                <h5 class="card-title">{{item.item_name}}</h5>
+                <p class="card-text">{{item.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="{{commonList.purchase_link}}">Purchase Link</a>
+                <a href="{{item.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: {{commonList.user.name}}</small>
+                  <small class="text-muted">Added by: {{item.user.name}}</small>
                 </p>
               </div>
             </div>
@@ -47,23 +47,23 @@
             <h5 class="card-title">Click edit to edit or delete items to your personal list.</h5>
           </div>
         </div>
-        {{#each userLists as |userList|}}
+        {{#each lists as |list|}}
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="{{userList.img_link}}" class="img-fluid rounded-start" alt="..." />
+              <img src="{{list.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{userList.item_name}}</h5>
-                <p class="card-text">{{userList.description}}</p>
+                <h5 class="card-title">{{list.item_name}}</h5>
+                <p class="card-text">{{list.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="{{userList.purchase_link}}">Purchase Link</a>
+                <a href="{{list.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: {{userList.user.username}}</small>
+                  <small class="text-muted">Added by: {{list.user.username}}</small>
                 </p>
               </div>
             </div>
@@ -87,23 +87,23 @@
     </div>
   </div>
 {{else}}
-{{#each commonLists as |commonList|}}
+{{#each items as |item|}}
 <main class="container container-fluid mt-5">
     <div class="card mb-3" >
       <div class="row g-0">
         <div class="col-md-2">
-          <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="...">
+          <img src="{{item.img_link}}" class="img-fluid rounded-start" alt="...">
         </div>
         <div class="col-md-6">
           <div class="card-body">
-            <h5 class="card-title">{{commonList.item_name}}</h5>
-            <p class="card-text">{{commonList.description}}</p>
+            <h5 class="card-title">{{item.item_name}}</h5>
+            <p class="card-text">{{item.description}}</p>
           </div>
         </div>
         <div class="col-md-2">
           <div class="card-body">
-            <a href="{{commonList.purchase_link}}">Purchase Link</a>
-            <p class="card-text"><small class="text-muted">Added by: {{commonList.user.username}}</small></p>
+            <a href="{{item.purchase_link}}">Purchase Link</a>
+            <p class="card-text"><small class="text-muted">Added by: {{item.user.username}}</small></p>
           </div>
         </div>
       </div>

@@ -1,0 +1,18 @@
+
+  <form class="form update-common-item">
+    <div class="form-group">
+      <label for="update-item-name">Name</label>
+      <input class="form-input" type="text" id="item_name" value="{{currentItem.item_name}}" />
+    </div>
+    <div class="form-group">
+      <label for="update-post-description">Content</label>
+      <input class="form-input" type="test" id="description" value="{{currentItem.description}}" />
+      <input class="" type="hidden" id="post_id" value ="{{currentItem.id}}"/>
+    </div>
+    <div class="form-group">
+      <button class="btn" id="update-common-item" type="submit">Update</button>
+    </div>
+    <div class="form-group">
+      <button class="btn" id="#delete-item" type="submit" value="{{currentItem.id}}">Delete</button>
+    </div>
+  </form>

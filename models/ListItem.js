@@ -2,9 +2,9 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection');
 
-class CommonUser extends Model {}
+class ListItem extends Model {}
 
-CommonUser.init(
+ListItem.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -12,17 +12,17 @@ CommonUser.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    userlist_id: {
+    list_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'userlist',
+        model: 'list',
         key: 'id',
       },
     },
-    commonlist_id: {
+    item_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'commonlist',
+        model: 'item',
         key: 'id',
       },
     },
@@ -32,8 +32,8 @@ CommonUser.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'commonuser',
+    modelName: 'listitem',
   }
 );
 
-module.exports = CommonUser;
+module.exports = ListItem;

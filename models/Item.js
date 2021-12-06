@@ -1,10 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class CommonList extends Model {};
+class Item extends Model {};
 
 
-CommonList.init(
+Item.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -42,8 +42,8 @@ CommonList.init(
   timestamps: false,
   freezeTableName: true,
   underscored: true,
-  modelName: 'commonlist',
+  modelName: 'item',
   }
 );
 
-module.exports = CommonList;
+module.exports = Item;
