@@ -41,22 +41,19 @@
         <div class="card m-2">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="https://picsum.photos/200" class="img-fluid rounded-start" alt="..." />
+              <img src="{{user.commonList.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title">Item name</h5>
-                <p class="card-text">
-                  Item Description
-                  ase;kralskejrlkasjela;jrsekltjal;sejkltjals;tejalsktjelkatsjelktja;lskejtlasjte;ljkta
-                </p>
+                <h5 class="card-title">{{user.commonList.item_name}}</h5>
+                <p class="card-text">{{user.commonList.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="#">Purchase Link</a>
+                <a href="{{user.commonList.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: username</small>
+                  <small class="text-muted">Added by: {{user.username}}</small>
                 </p>
               </div>
             </div>

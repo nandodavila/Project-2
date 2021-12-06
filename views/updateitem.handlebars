@@ -1,0 +1,73 @@
+  <div class="container mt-5 ">
+    <div class="row">
+      <div class="col">
+        <div class="card mb-3">
+          <div class="row g-0 d-flex align-items-center" style="height: 10rem">
+            <div class="col-md-2">
+              <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="..." />
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                <h5 class="card-title">{{commonList.item_name}}</h5>
+                <p class="card-text">{{commonList.description}}</p>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <div class="card-body">
+                <a href="{{commonList.purchase_link}}">Purchase Link</a>
+                <p class="card-text">
+                  <small class="text-muted">Added by: {{commonList.user.username}}</small>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <form>
+          <div class="card bg-primary text-white mb-4">
+            <div class="card-body">Update an item!</div>
+          </div>
+          <div class="row mb-4">
+            <label class="col-sm-2 col-form-label" for="update-purchase-link">Link to the item</label>
+            <div class="col-sm-10">
+              <input type="text" id="update-purchase-link" class="form-control" />
+            </div>
+          </div>
+          <div class="card bg-info text-white mb-4">
+            <div class="card-body">Optional</div>
+          </div>
+          <div class="row mb-4">
+            <label class="col-sm-2 col-form-label" for="update-item-name">Item Name</label>
+            <div class="col-sm-10">
+              <input type="email" id="update-item-name" class="form-control" />
+            </div>
+          </div>
+          <div class="row mb-4">
+            <label class="col-sm-2 col-form-label" for="update-item-description">Item Description</label>
+            <div class="col-sm-10">
+              <textarea class="form-control" id="update-item-description" rows="4"></textarea>
+            </div>
+          </div>
+          <div class="row mb-4">
+            <label class="col-sm-2 col-form-label" for="update-image-link">Link to image for item</label>
+            <div class="col-sm-10">
+              <input type="email" id="update-image-link" class="form-control" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-block mb-4" id="update" data-id="{{commonList.id}}">Update Item</button>
+              </div>
+            </div>
+            <div class="col">
+              <div class="text-center">
+                <button type="button" class="btn btn-danger btn-block mb-4" id="delete" data-id="{{commonList.id}}">Delete Item</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
