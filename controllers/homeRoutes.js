@@ -13,14 +13,17 @@ router.get('/', async (req, res) => {
     const items = itemsData.map((item) => item.get({ plain: true }));
     //Change handlebars file name
     res.render('homepage', {
-      items
+      items,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-
+router.get('/additem', (req, res) => {
+  res.render('additem');
+});
 
 router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
@@ -77,7 +80,7 @@ router.get('/updateitem/:id', async (req, res) => {
 });
 
 // what an authed user sees to update their own list and add items
-router.get('/:username', async (req, res) => {
+router.get('/dashboard', async (req, res) => {
   try {
     const itemsData = await Item.findAll({
       include: [
@@ -100,7 +103,7 @@ router.get('/:username', async (req, res) => {
 
     const userLists = userListData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
-    res.render('homepage', {
+    res.render('dashboard', {
       userLists,
       items,
       logged_in: req.session.logged_in,
