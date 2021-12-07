@@ -1,41 +1,26 @@
 const router = require('express').Router();
 const { User, ListItem, Item } = require('../models');
 
-
 router.get('/', async (req, res) => {
   try {
-    const commonListData = await CommonList.findAll({
+    const itemsData = await Item.findAll({
       include: [
         {
           model: User,
         },
       ],
     });
-    const commonLists = commonListData.map((items) => items.get({ plain: true }));
-
-    const userListData = await CommonList.findAll({
-      where: {
-        user_id: req.session.user_id
-      },
-      include: [
-        {
-          model: User,
-        },
-      ],
-    })
-
-    const userLists = userListData.map((items) => items.get({ plain: true }));
+    const items = itemsData.map((item) => item.get({ plain: true }));
     //Change handlebars file name
     res.render('homepage', {
-      userLists,
-      commonLists,
-      logged_in: req.session.logged_in,
-      name: req.session.username
+      items
     });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
 
 router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
@@ -46,7 +31,7 @@ router.get('/login-signup', (req, res) => {
   res.render('login-signup');
 });
 
-router.get('/:username', async (req, res) => {
+router.get('/list/:username', async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
@@ -68,19 +53,6 @@ router.get('/:username', async (req, res) => {
   }
 });
 
-
-router.get('/', async (req, res) => {
-  try {
-    const itemsData = await Item.findAll();
-    const items = itemsData.map((item) => item.get({ plain: true }));
-    //Change handlebars file name
-    res.render('homepage', {
-      items
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 
 router.get('/updateitem/:id', async (req, res) => {
   console.log("id "+req.params.id);
@@ -104,13 +76,39 @@ router.get('/updateitem/:id', async (req, res) => {
   }
 });
 
-router.get('/login-signup', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/');
-    return;
-  }
+// what an authed user sees to update their own list and add items
+router.get('/:username', async (req, res) => {
+  try {
+    const itemsData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+    const items = itemsData.map((item) => item.get({ plain: true }));
+    const userListData = await Item.findAll({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+      ],
+    })
 
-  res.render('login-signup');
+    const userLists = userListData.map((items) => items.get({ plain: true }));
+    //Change handlebars file name
+    res.render('homepage', {
+      userLists,
+      items,
+      logged_in: req.session.logged_in,
+      name: req.session.username
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
