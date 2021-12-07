@@ -32,7 +32,7 @@ router.get('/login-signup', (req, res) => {
   res.render('login-signup');
 });
 
-router.get('/list/:username', async (req, res) => {
+router.get('/search/:username', async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
