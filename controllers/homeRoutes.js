@@ -21,7 +21,9 @@ router.get('/', async (req, res) => {
   }
 });
 
-
+router.get('/additem', (req, res) => {
+  res.render('additem');
+});
 
 router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
