@@ -56,20 +56,13 @@ router.get('/search/:username', async (req, res) => {
 
 
 router.get('/updateitem/:id', async (req, res) => {
-  console.log("id "+req.params.id);
+  console.log("id "+ req.params.id);
   try {
-    const currentItemsData = await Item.findByPk(req.params.id, {
-      include: [
-        {
-          model: ListItem,
-          attributes: ['name'],
-        }
-      ]
-    });
-    const currentItems = currentItemsData.get({ plain: true });
+    const currentItemsData = await Item.findByPk(req.params.id);
+    const currentItem = currentItemsData.get({ plain: true });
     //Change handlebars file name
     res.render('updateitem', {
-      currentItems
+      currentItem
     });
   } catch (err) {
     console.log(err);
