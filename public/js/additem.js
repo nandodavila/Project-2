@@ -21,7 +21,7 @@ const createItemFormHandler = async (event) => {
       }
     }
 };
-  
+
 document
   .querySelector('#new-common-item')
   .addEventListener('submit', createItemFormHandler);
