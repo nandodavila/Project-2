@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const { User, ListItem, Item } = require('../models');
+const { User, ListItem, Item, List} = require('../models');
+const { Op } = require("sequelize");
 
 router.get('/', async (req, res) => {
   try {
@@ -21,7 +22,9 @@ router.get('/', async (req, res) => {
   }
 });
 
-
+router.get('/additem', (req, res) => {
+  res.render('additem');
+});
 
 router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
@@ -32,22 +35,59 @@ router.get('/login-signup', (req, res) => {
   res.render('login-signup');
 });
 
-router.get('/search/:username', async (req, res) => {
+
+router.get('/search/:search', async (req, res) => {
+
   try {
     const userData = await User.findAll({
       where: {
-        username: req.params.username
+        [Op.or]: [
+          { username: req.params.search }, 
+          { email: req.params.search }
+        ]  
       },
     });
-    const user = userData.map((user) => user.get({ plain: true }));
-    console.log(user)
-    // res.status(200).res.json(user)
+    console.log(userData.length)
+    if (userData.length == 0) {
+    } else {
+      console.log(userData)
+      const user = userData.map((user) => user.get({ plain: true }))
+      res.status(200).json({user})
+    }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
-    // res.redirect('/login-signup')
+router.get('/profile/:username', async (req, res) => {
+  try {
+    const userData = await User.findAll({
+    where: {
+      username: req.params.username
+    },
+    include: [
+      {
+        model: List,
+      },
+    ],
+  });
+  const user = userData.map((user) => user.get({ plain: true }));
 
-    // Might Change handlebars file name
+    const itemsData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+    const items = itemsData.map((item) => item.get({ plain: true }));
+
+    
+    //Change handlebars file name
     res.render('otheruser', {
       user,
+      items,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     res.status(500).json(err);
