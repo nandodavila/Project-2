@@ -18,12 +18,16 @@ router.post('/', withAuth , async (req, res) => {
   try {
 
     const {purchase_link, description, item_name, img_link} = req.body
-    const {title, info, img} = await getInfo(purchase_link)
+
+    if (!description || !item_name || !img_link) {
+    
+      const {title, info, img} = await getInfo(purchase_link)
       
       if(!description) req.body.description = info
       if(!item_name) req.body.item_name = title
       if(!img_link) req.body.img_link = img
-
+    
+    }
     const items = await Item.create({
       item_name: req.body.item_name,
       description: req.body.description,
