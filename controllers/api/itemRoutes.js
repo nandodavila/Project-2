@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Item } = require('../../models');
 const withAuth = require('../../utils/auth');
+const { getInfo } = require('../../utils/iteminfo')
 
 router.get('/' , async (req, res) => {
   try {
@@ -15,6 +16,21 @@ router.get('/' , async (req, res) => {
 
 router.post('/', withAuth , async (req, res) => {
   try {
+
+    const {purchase_link, description, item_name, img_link} = req.body
+
+    switch (true) {
+      case purchase_link && !description && !item_name && !img_link:
+          const {title, info, img} = await getInfo(purchase_link)
+
+          req.body.description = info
+          req.body.item_name = title
+          req.body.img_link = img
+        break;
+    
+      default:
+        break;
+    }
 
     const items = await Item.create(req.body, {
       user_id: req.session.user_id
