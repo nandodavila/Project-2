@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User, ListItem, Item, List} = require('../models');
+const { Op } = require("sequelize");
 
 router.get('/', async (req, res) => {
   try {
@@ -40,12 +41,19 @@ router.get('/search/:search', async (req, res) => {
   try {
     const userData = await User.findAll({
       where: {
-        username: req.params.search
+        [Op.or]: [
+          { username: req.params.search }, 
+          { email: req.params.search }
+        ]  
       },
     });
-    const user = userData.map((user) => user.get({ plain: true }));
-    console.log(user)
-    res.status(200).json(user)
+    console.log(userData.length)
+    if (userData.length == 0) {
+    } else {
+      console.log(userData)
+      const user = userData.map((user) => user.get({ plain: true }))
+      res.status(200).json({user})
+    }
   } catch (err) {
     res.status(500).json(err);
   }
