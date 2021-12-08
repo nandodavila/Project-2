@@ -32,7 +32,11 @@ router.post('/', withAuth , async (req, res) => {
         break;
     }
 
-    const items = await Item.create(req.body, {
+    const items = await Item.create({
+      item_name: req.body.item_name,
+      description: req.body.description,
+      img_link: req.body.img_link,
+      purchase_link: req.body.purchase_link,
       user_id: req.session.user_id
     });
     res.status(200).json(items);
