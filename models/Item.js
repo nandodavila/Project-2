@@ -21,11 +21,11 @@ Item.init(
       allowNull: true,
     },
     img_link: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1024),
       allowNull: true,
     },
     purchase_link: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(1024),
       allowNull: true,
     },
     user_id: {
