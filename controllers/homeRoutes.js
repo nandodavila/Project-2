@@ -23,7 +23,9 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/additem', (req, res) => {
-  res.render('additem');
+  res.render('additem', {
+    logged_in: req.session.logged_in
+  });
 });
 
 router.get('/login-signup', (req, res) => {
@@ -102,7 +104,8 @@ router.get('/updateitem/:id', async (req, res) => {
     const currentItem = currentItemsData.get({ plain: true });
     //Change handlebars file name
     res.render('updateitem', {
-      currentItem
+      currentItem,
+      logged_in: req.session.logged_in
     });
   } catch (err) {
     console.log(err);

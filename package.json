@@ -26,7 +26,13 @@
     "express": "^4.17.1",
     "express-handlebars": "^6.0.2",
     "express-session": "^1.17.2",
+    "get-urls": "^10.0.1",
+    "is-base64": "^1.1.0",
     "mysql2": "^2.3.3",
+    "puppeteer": "^12.0.1",
+    "puppeteer-extra": "^3.2.3",
+    "puppeteer-extra-plugin-stealth": "^2.9.0",
+    "request": "^2.88.2",
     "sequelize": "^6.12.0-alpha.1"
   }
 }
