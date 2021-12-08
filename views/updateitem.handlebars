@@ -4,19 +4,19 @@
         <div class="card mb-3">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="{{commonList.img_link}}" class="img-fluid rounded-start" alt="..." />
+              <img src="{{currentItem.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{commonList.item_name}}</h5>
-                <p class="card-text">{{commonList.description}}</p>
+                <h5 class="card-title">{{currentItem.item_name}}</h5>
+                <p class="card-text">{{currentItem.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="{{commonList.purchase_link}}">Purchase Link</a>
+                <a href="{{currentItem.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: {{commonList.user.username}}</small>
+                  <small class="text-muted">Added by: {{currentItem.user.username}}</small>
                 </p>
               </div>
             </div>
