@@ -36,13 +36,13 @@ const getImg = async (page, uri) => {
     ) {
       return imgRelLink.href;
     }
-    const twitterImg = document.querySelector('meta[name="twitter:image"]');
+    const amazonImg = document.querySelector('img[id=landingImage]');
     if (
-      twitterImg != null &&
-      twitterImg.content.length > 0 &&
-      (await urlImageIsAccessible(twitterImg.content))
+      amazonImg != null &&
+      amazonImg.src.length > 0 &&
+      (await urlImageIsAccessible(amazonImg.src))
     ) {
-      return twitterImg.content;
+      return amazonImg.src;
     }
 
     let imgs = Array.from(document.getElementsByTagName("img"));
@@ -141,23 +141,6 @@ const getDescription = async (page) => {
   return description;
 };
 
-const getDomainName = async (page, uri) => {
-  const domainName = await page.evaluate(() => {
-    const canonicalLink = document.querySelector("link[rel=canonical]");
-    if (canonicalLink != null && canonicalLink.href.length > 0) {
-      return canonicalLink.href;
-    }
-    const ogUrlMeta = document.querySelector('meta[property="og:url"]');
-    if (ogUrlMeta != null && ogUrlMeta.content.length > 0) {
-      return ogUrlMeta.content;
-    }
-    return null;
-  });
-  return domainName != null
-    ? new URL(domainName).hostname.replace("www.", "")
-    : new URL(uri).hostname.replace("www.", "");
-};
-
 const getInfo = async (
     uri,
     puppeteerArgs = [
@@ -188,7 +171,6 @@ const getInfo = async (
     const obj = {};
     obj.title = await getTitle(page);
     obj.info = await getDescription(page);
-    obj.domain = await getDomainName(page, uri);
     obj.img = await getImg(page, uri);
   
     await browser.close();

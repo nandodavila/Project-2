@@ -18,19 +18,11 @@ router.post('/', withAuth , async (req, res) => {
   try {
 
     const {purchase_link, description, item_name, img_link} = req.body
-
-    switch (true) {
-      case purchase_link && !description && !item_name && !img_link:
-          const {title, info, img} = await getInfo(purchase_link)
-
-          req.body.description = info
-          req.body.item_name = title
-          req.body.img_link = img
-        break;
-    
-      default:
-        break;
-    }
+    const {title, info, img} = await getInfo(purchase_link)
+      
+      if(!description) req.body.description = info
+      if(!item_name) req.body.item_name = title
+      if(!img_link) req.body.img_link = img
 
     const items = await Item.create({
       item_name: req.body.item_name,
