@@ -5,12 +5,11 @@ const updateItemFormHandler = async (event) => {
     const description = document.querySelector('#update-item-description').value.trim();
     const img_link = document.querySelector('#update-image-link').value.trim();
     const purchase_link = document.querySelector('#update-purchase-link').value.trim();
-    const user_id = document.querySelector('#user_id').value.trim();
+    const user_id = document.querySelector('#user_id').getAttribute('data-id');
     const item_id = event.target.id;
     
     if (item_name || description || purchase_link || img_link ) {
-      
-        const response = await fetch('/api/item/'+item_id, {
+        const response = await fetch(`/api/item/${item_id}`, {
             method: 'PUT',
             body: JSON.stringify({ item_name, description, img_link, purchase_link, user_id}),
             headers: { 'Content-Type': 'application/json' },
