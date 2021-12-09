@@ -51,6 +51,7 @@ router.get('/search/:search', async (req, res) => {
     });
     console.log(userData.length)
     if (userData.length == 0) {
+      return res.status(500).json(err)
     } else {
       console.log(userData)
       const user = userData.map((user) => user.get({ plain: true }))
