@@ -53,7 +53,6 @@ router.get('/search/:search', async (req, res) => {
     if (userData.length == 0) {
       return res.status(500).json(err)
     } else {
-      console.log(userData)
       const user = userData.map((user) => user.get({ plain: true }))
       res.status(200).json({user})
     }
@@ -99,7 +98,7 @@ router.get('/profile/:username', async (req, res) => {
 
 
 router.get('/updateitem/:id', async (req, res) => {
-  console.log("id "+ req.params.id);
+  
   try {
     const currentItemsData = await Item.findByPk(req.params.id,{
       include:[{
@@ -113,7 +112,7 @@ router.get('/updateitem/:id', async (req, res) => {
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json(err);
   }
 });
@@ -140,27 +139,29 @@ router.get('/dashboard', async (req, res) => {
       ],
     })
     
-    const listData = await List.findOne({
-      where: {
-        user_id: req.session.user_id
-      },
-      include: [
-        {
-          model: User,
-        },
-        {
-          model: Item
-        }
-      ],
-    })
-    console.log(listData)
+    // const listData = await List.findOne({
+    //   where: {
+    //     user_id: req.session.user_id
+    //   },
+    //   include: [
+    //     {
+    //       model: User,
+    //     },
+    //     {
+    //       model: Item
+    //     }
+    //   ],
+    // })
+    // console.log(listData)
 
     const userLists = userListData.map((items) => items.get({ plain: true }));
+    const userListId = userLists[0].user_id
+    console.log(userLists[0].user_id)
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
+      userListId,
       items,
-      listData,
       logged_in: req.session.logged_in,
       name: req.session.username
     });

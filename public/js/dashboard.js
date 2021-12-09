@@ -1,3 +1,5 @@
+// const req = require("express/lib/request");
+
 const addItemToList = async (event) => {
 
     event.preventDefault();
@@ -8,19 +10,16 @@ const addItemToList = async (event) => {
     console.log(list_id)
 
 
-    const responsePut = await fetch(`/api/list/${list_id}&${item_id}`, {
+    const responsePut = await fetch(`/api/list/add/${list_id}&${item_id}`, {
         method: 'PUT',
         body: JSON.stringify(
             { 
-                item_name: itemData.id, 
-                description: itemData.description,
-                img_link: itemData.img_link,
-                purchase_link: purchase_link,
-                user_id: req.session.user_id, 
+                id: list_id,
+                item_id: item_id
             }),        
         headers: { 'Content-Type': 'application/json' },
-
-          });
+        });
+          console.log(responsePut)
           if (responsePut.ok) {
                 document.location.replace('/dashboard');
               } else {
@@ -48,7 +47,7 @@ document
   .querySelector('.add')
   .addEventListener('click', addItemToList);
 
-  
+
 //This is for updating a common list item
 const editForUser = () => {
   let username = document.querySelector('.username').textContent;
