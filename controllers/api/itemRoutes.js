@@ -1,11 +1,13 @@
 const router = require('express').Router();
-const { Item } = require('../../models');
+const { Item, User, List } = require('../../models');
 const withAuth = require('../../utils/auth');
 const { getInfo } = require('../../utils/iteminfo')
 
 router.get('/' , async (req, res) => {
   try {
-    const itemData = await Item.findAll();
+    const itemData = await Item.findAll({
+      include: [{ model: User },{ model: List }],
+    });
     const items = itemData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
     res.status(200).json(items);
