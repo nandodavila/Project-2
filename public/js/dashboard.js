@@ -3,21 +3,35 @@ const addItemToList = async (event) => {
     event.stopPropagation();
 
     const id = event.target.getAttribute('data-id');
-  
-    if (item_name && description && purchase_link) {
-      
-      const response = await fetch('/api/item', {
-        method: 'POST',
-        body: JSON.stringify({ item_name, description, img_link, purchase_link}),
-        headers: { 'Content-Type': 'application/json' },
-      });
-  
-      if (response.ok) {
-        document.location.replace('/');
-      } else {
-        alert('Failed to add item.');
-      }
+    console.log(id)
+
+    const response = await fetch(`/api/item/${id}`)
+    console.log(response)
+    const itemData = await response.json();
+    console.log(itemData) 
+
+    if (response.ok) {
+        const responsePut = await fetch('/api/list/${list_id}&${item_id}', {
+            method: 'PUT',
+            body: JSON.stringify({ item_name, description, img_link, purchase_link, user_id }),
+            headers: { 'Content-Type': 'application/json' },
+          });
     }
+
+    // if (item_name && description && purchase_link) {
+      
+    //   const response = await fetch('/api/item', {
+    //     method: 'POST',
+    //     body: JSON.stringify({ item_name, description, img_link, purchase_link}),
+    //     headers: { 'Content-Type': 'application/json' },
+    //   });
+  
+    //   if (response.ok) {
+    //     document.location.replace('/');
+    //   } else {
+    //     alert('Failed to add item.');
+    //   }
+    // }
 };
 
 
@@ -26,7 +40,7 @@ const addItemToList = async (event) => {
 
 document
   .querySelector('.add')
-  .addEventListener('submit', addItemToList);
+  .addEventListener('click', addItemToList);
 //This is for updating a common list item
 const editForUser = () => {
     let username = document.querySelector('.username').textContent;
