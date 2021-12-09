@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="col">
-        <form>
+        <form class="update" id="{{currentItem.id}}">
           <div class="card bg-primary text-white mb-4">
             <div class="card-body">Update an item!</div>
           </div>
@@ -41,6 +41,7 @@
             <label class="col-sm-2 col-form-label" for="update-item-name">Item Name</label>
             <div class="col-sm-10">
               <input type="text" id="update-item-name" class="form-control" value="{{currentItem.item_name}}" />
+              <input type="hidden" id="user_id" class="form-control" data-id="{{currentItem.user.id}}" />
             </div>
           </div>
           <div class="row mb-4">
@@ -53,13 +54,12 @@
             <label class="col-sm-2 col-form-label" for="update-image-link">Link to image for item</label>
             <div class="col-sm-10">
               <input type="email" id="update-image-link" class="form-control" value="{{currentItem.img_link}}" />
-              <input type="hidden" id="user_id" class="form-control" value="{{currentItem.user.id}}" />
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block mb-4 update" id="{{currentItem.id}}">Update Item</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4" id="{{currentItem.id}}">Update Item</button>
               </div>
             </div>
             <div class="col">
