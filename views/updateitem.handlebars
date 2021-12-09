@@ -31,7 +31,7 @@
           <div class="row mb-4">
             <label class="col-sm-2 col-form-label" for="update-purchase-link">Link to the item</label>
             <div class="col-sm-10">
-              <input type="text" id="update-purchase-link" class="form-control" />
+              <input type="text" id="update-purchase-link" class="form-control" value="{{currentItem.purchase_link}}"/>
             </div>
           </div>
           <div class="card bg-info text-white mb-4">
@@ -40,30 +40,31 @@
           <div class="row mb-4">
             <label class="col-sm-2 col-form-label" for="update-item-name">Item Name</label>
             <div class="col-sm-10">
-              <input type="email" id="update-item-name" class="form-control" />
+              <input type="text" id="update-item-name" class="form-control" value="{{currentItem.item_name}}" />
             </div>
           </div>
           <div class="row mb-4">
             <label class="col-sm-2 col-form-label" for="update-item-description">Item Description</label>
             <div class="col-sm-10">
-              <textarea class="form-control" id="update-item-description" rows="4"></textarea>
+              <textarea class="form-control" id="update-item-description" rows="4">{{currentItem.description}}</textarea>
             </div>
           </div>
           <div class="row mb-4">
             <label class="col-sm-2 col-form-label" for="update-image-link">Link to image for item</label>
             <div class="col-sm-10">
-              <input type="email" id="update-image-link" class="form-control" />
+              <input type="email" id="update-image-link" class="form-control" value="{{currentItem.img_link}}" />
+              <input type="hidden" id="user_id" class="form-control" value="{{currentItem.user.id}}" />
             </div>
           </div>
           <div class="row">
             <div class="col">
               <div class="text-center">
-                <button type="submit" class="btn btn-primary btn-block mb-4" id="update" data-id="{{commonList.id}}">Update Item</button>
+                <button type="submit" class="btn btn-primary btn-block mb-4 update" id="{{currentItem.id}}">Update Item</button>
               </div>
             </div>
             <div class="col">
               <div class="text-center">
-                <button type="button" class="btn btn-danger btn-block mb-4" id="delete" data-id="{{commonList.id}}">Delete Item</button>
+                <button type="button" class="btn btn-danger btn-block mb-4 delete" id="{{currentItem.id}}">Delete Item</button>
               </div>
             </div>
           </div>
@@ -71,3 +72,4 @@
       </div>
     </div>
   </div>
+  <script src="/js/updateitem.js"></script>
