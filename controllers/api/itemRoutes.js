@@ -16,6 +16,18 @@ router.get('/' , async (req, res) => {
   }
 });
 
+router.get('/:id' , async (req, res) => {
+  try {
+    const itemData = await Item.findByPk(req.params.id);
+    const items = itemData.get({ plain: true });
+    //Change handlebars file name
+    res.status(200).json(items);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 router.post('/', withAuth , async (req, res) => {
   try {
 
