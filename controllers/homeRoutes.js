@@ -135,18 +135,38 @@ router.get('/dashboard', async (req, res) => {
         },
       ],
     })
+    
+    const listData = await List.findOne({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Item
+        }
+      ],
+    })
+    console.log(listData)
 
     const userLists = userListData.map((items) => items.get({ plain: true }));
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
       items,
+      listData,
       logged_in: req.session.logged_in,
       name: req.session.username
     });
   } catch (err) {
     res.status(500).json(err);
   }
+
+  
 });
+
+
 
 module.exports = router;

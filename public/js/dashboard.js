@@ -2,20 +2,29 @@ const addItemToList = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    const id = event.target.getAttribute('data-id');
-    console.log(id)
+    const item_id = event.target.getAttribute('data-id');
+    const list_id = event.target.getAttribute('list-id');
+    console.log(list_id)
 
-    const response = await fetch(`/api/item/${id}`)
-    console.log(response)
-    const itemData = await response.json();
-    console.log(itemData) 
 
-    if (response.ok) {
-        const responsePut = await fetch('/api/list/${list_id}&${item_id}', {
-            method: 'PUT',
-            body: JSON.stringify({ item_name, description, img_link, purchase_link, user_id }),
-            headers: { 'Content-Type': 'application/json' },
+    const responsePut = await fetch(`/api/list/${list_id}&${item_id}`, {
+        method: 'PUT',
+        body: JSON.stringify(
+            { 
+                item_name: itemData.id, 
+                description: itemData.description,
+                img_link: itemData.img_link,
+                purchase_link: purchase_link,
+                user_id: req.session.user_id, 
+            }),        
+        headers: { 'Content-Type': 'application/json' },
+
           });
+          if (responsePut.ok) {
+                document.location.replace('/dashboard');
+              } else {
+                alert('Failed to add item.');
+              }
     }
 
     // if (item_name && description && purchase_link) {
@@ -31,8 +40,7 @@ const addItemToList = async (event) => {
     //   } else {
     //     alert('Failed to add item.');
     //   }
-    // }
-};
+    // 
 
 
 
