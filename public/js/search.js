@@ -8,6 +8,7 @@ const searchFormHandler = async (event) => {
       // Send a POST request to the API endpoint
       const response = await fetch(`/search/${search}`)
       const userData = await response.json();
+      console.log(response)
       console.log(userData);
       const username = userData.user[0].username
       console.log(userData.user[0].username)
