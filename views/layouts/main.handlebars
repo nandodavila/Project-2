@@ -14,8 +14,9 @@
   </head>
   <body>
     <nav class='navbar navbar-expand-lg navbar-dark bg-primary'>
-      <div class='container-fluid'>
-        <a class='navbar-brand' href='/'>The Wish List!</a>
+      <div class='container-fluid d-flex align-items-center'>
+        <img src="/images/santaico.png" width="30" height="30"/> 
+        <a class='navbar-brand m-2' href='/'>Not So Subtle Santa!</a>
         <button
           class='navbar-toggler'
           type='button'
@@ -28,17 +29,17 @@
           <span class='navbar-toggler-icon'></span>
         </button>
         <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-          <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+          <ul class='navbar-nav me-auto'>
             {{#if logged_in}}
             <li class='nav-item'>
               <a
                 class='nav-link active'
                 aria-current='page'
                 href='/dashboard'
-              >dashboard</a>
+              >Dashboard</a>
             </li>
             <li class='nav-item'>
-              <button class='btn btn-outline-danger' type='button' id='logout'>
+              <button class='btn btn-outline-success' type='button' id='logout'>
                 Log out
               </button>
             </li>
@@ -48,9 +49,9 @@
             </li>
             {{/if}}
           </ul>
-          <form class='d-flex search-form'>
+          <form class='d-flex search-form mb-0'>
             <input
-              class='form-control me-2'
+              class='form-control'
               id='search-input'
               type='search'
               placeholder='Search for users'
