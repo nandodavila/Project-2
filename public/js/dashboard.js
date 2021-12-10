@@ -25,10 +25,7 @@ const addItemToList = async (event) => {
               } else {
                 alert('Failed to add item.');
               }
-    }
-
-  }
-};
+    };
     // if (item_name && description && purchase_link) {
       
     //   const response = await fetch('/api/item', {
