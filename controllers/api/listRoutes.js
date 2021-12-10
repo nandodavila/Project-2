@@ -109,10 +109,14 @@ router.put('/delete/:id' , async (req, res) => {
     const list = listData.get({ plain: true });
 
     // get existing item array and filter to remove itemId
+    let filtered
+
     if (list.items) {
       let existarray = list.items
 
       // filter existarray to find the id to be removed and return new list
+      filtered = existarray.filter(id => id != itemId)
+      console.log(filtered)
     } 
 
     // make a body to update List
