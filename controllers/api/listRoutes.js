@@ -43,13 +43,13 @@ router.put('/add/:id' , async (req, res) => {
   const itemId = split[1]
 
   try {
-    // find users list with listId
+    // find list with matching listId
     const listData = await List.findByPk(listId, {
       include: [{ model: User },{ model: Item }],
     });
     const list = listData.get({ plain: true });
 
-    // assign variable to existarray and push item
+    // get existing item array and add new itemId to it
     let existarray
 
     if (list.items) {
@@ -60,14 +60,14 @@ router.put('/add/:id' , async (req, res) => {
       existarray.push(itemId)
     }
     
-    // make a body for new List
+    // make a body to update List
     const newbody = {
       id: list.id,
       user_id: list.user_id,
       items: existarray
     }
 
-    // create new List with newbody
+    // update List with body
     const updatedList = await List.update(newbody, {
       where: {
         id: listId,
@@ -75,7 +75,7 @@ router.put('/add/:id' , async (req, res) => {
       include: [{ model: User },{ model: Item }],
     })
 
-    // make a body for ListItem
+    // make a body for new ListItem
     const listItemBody = {
       list_id: listId,
       item_id: itemId,
@@ -102,13 +102,13 @@ router.put('/delete/:id' , async (req, res) => {
   const itemId = split[1]
 
   try {
-    // find users list with listId
+    // find list with matching listId
     const listData = await List.findByPk(listId, {
       include: [{ model: User },{ model: Item }],
     });
     const list = listData.get({ plain: true });
 
-    // assign variable to existarray and push item
+    // get existing item array and filter to remove itemId
     let existarray
 
     if (list.items) {
@@ -117,14 +117,14 @@ router.put('/delete/:id' , async (req, res) => {
       // filter existarray to find the id to be removed and return new list
     } 
 
-    // make a body for new List
+    // make a body to update List
     const newbody = {
       id: list.id,
       user_id: list.user_id,
       items: existarray
     }
 
-    // create new List with newbody
+    // update List with body
     const updatedList = await List.update(newbody, {
       where: {
         id: listId,
@@ -132,7 +132,7 @@ router.put('/delete/:id' , async (req, res) => {
       include: [{ model: User },{ model: Item }],
     })
 
-    // destroy list item that matches itemId
+    // destroy ListItem that matches itemId and listId
     const newListItem = await ListItem.destroy()
 
     res.status(200).json(lists);
