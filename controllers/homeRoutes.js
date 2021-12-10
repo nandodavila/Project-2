@@ -136,32 +136,37 @@ router.get('/dashboard', async (req, res) => {
         {
           model: User,
         },
+        {
+          model: List
+        },
       ],
     })
     
-    // const listData = await List.findOne({
-    //   where: {
-    //     user_id: req.session.user_id
-    //   },
-    //   include: [
-    //     {
-    //       model: User,
-    //     },
-    //     {
-    //       model: Item
-    //     }
-    //   ],
-    // })
-    // console.log(listData)
-
+   
     const userLists = userListData.map((items) => items.get({ plain: true }));
-    const userListId = userLists[0].user_id
-    console.log(userLists[0].user_id)
+
+     const listData = await List.findOne({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Item
+        }
+      ],
+    })
+    console.log(listData)
+    const list = listData.get({ plain: true });
+    console.log(list)
+  
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
-      userListId,
       items,
+      list,
       logged_in: req.session.logged_in,
       name: req.session.username
     });

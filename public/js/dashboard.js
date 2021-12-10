@@ -3,10 +3,10 @@
 const addItemToList = async (event) => {
 
     event.preventDefault();
-    event.stopPropagation();
+    // event.stopPropagation();
 
     const item_id = event.target.getAttribute('data-id');
-    const list_id = event.target.getAttribute('list-id');
+    const list_id = event.target.getAttribute('data-id2');
     console.log(list_id)
 
 
