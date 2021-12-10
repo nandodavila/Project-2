@@ -32,7 +32,7 @@ document
 const deleteItem = async (event) => {
   const item_id = event.target.id;
 
-  if (id) {
+  if (item_id) {
     const response = await fetch('/api/item/'+item_id, {
       method: 'DELETE',
     });
