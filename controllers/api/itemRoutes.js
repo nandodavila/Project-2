@@ -68,9 +68,7 @@ router.put('/:id',withAuth, async (req, res) => {
       user_id: req.body.user_id
     },
     {
-      where: {
-        id: req.params.id,
-      }
+      
     });
     console.log("list "+ updateItemItem);
     res.status(200).json(updateItemItem);
