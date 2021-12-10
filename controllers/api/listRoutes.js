@@ -109,10 +109,8 @@ router.put('/delete/:id' , async (req, res) => {
     const list = listData.get({ plain: true });
 
     // get existing item array and filter to remove itemId
-    let existarray
-
     if (list.items) {
-      existarray = list.items
+      let existarray = list.items
 
       // filter existarray to find the id to be removed and return new list
     } 
@@ -133,7 +131,12 @@ router.put('/delete/:id' , async (req, res) => {
     })
 
     // destroy ListItem that matches itemId and listId
-    const newListItem = await ListItem.destroy()
+    const destroyListItem = await ListItem.destroy({
+      where: {
+        list_id: listId,
+        item_id: itemId
+      }
+    })
 
     res.status(200).json(lists);
   } catch (err) {
