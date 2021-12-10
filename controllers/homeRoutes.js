@@ -158,15 +158,16 @@ router.get('/dashboard', async (req, res) => {
         }
       ],
     })
-    console.log(listData)
     const list = listData.get({ plain: true });
+    // const listId = list.id
+    const listObj = 
     console.log(list)
   
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
       items,
-      list,
+      listObj,
       logged_in: req.session.logged_in,
       name: req.session.username
     });
