@@ -24,3 +24,15 @@ body {
   background-color: var(--main-dark-green) !important;
   color: var(--main-dark-green) !important;
 }
+
+.card-title-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5ex;
+}
+
+.card-description-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 5.5ex;
+}

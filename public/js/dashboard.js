@@ -40,7 +40,7 @@ const editForUser = () => {
                 const cardUserId = card.children[0].id;
                 if (body.id == cardUserId) {
                     const cardItemId = card.children[1].id;
-                    card.insertAdjacentHTML('beforeEnd', `<button type="button" id="${cardItemId}" class="btn btn-primary btn-lg edit-item">Edit</button>`);
+                    card.insertAdjacentHTML('beforeEnd', `<button type="button" id="${cardItemId}" class="btn shadow-sm btn-light btn-lg edit-item">Edit</button>`);
                 }
             });
             document
