@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const { List, User, Item, ListItem } = require('../../models');
 
+
+
 router.get('/' , async (req, res) => {
   try {
     const listData = await List.findAll({

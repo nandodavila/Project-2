@@ -25,8 +25,7 @@ const addItemToList = async (event) => {
               } else {
                 alert('Failed to add item.');
               }
-    }
-
+    };
     // if (item_name && description && purchase_link) {
       
     //   const response = await fetch('/api/item', {
@@ -41,7 +40,6 @@ const addItemToList = async (event) => {
     //     alert('Failed to add item.');
     //   }
     // 
-
 
 document
   .querySelector('.add')
