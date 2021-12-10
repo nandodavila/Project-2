@@ -95,9 +95,13 @@ router.get('/profile/:username', async (req, res) => {
         {
           model: User,
         },
+        {
+          model: Item,
+        }
       ],
     });
     const list = listData.get({ plain: true });
+    console.log(list)
 
     res.render('otheruser', {
       user,
