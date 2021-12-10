@@ -123,7 +123,7 @@ router.put('/delete/:id' , async (req, res) => {
     const newbody = {
       id: list.id,
       user_id: list.user_id,
-      items: existarray
+      items: filtered
     }
 
     // update List with body
@@ -142,7 +142,7 @@ router.put('/delete/:id' , async (req, res) => {
       }
     })
 
-    res.status(200).json(lists);
+    res.status(200).json({ message: "Item removed from list!"});
   } catch (err) {
     res.status(500).json(err);
   }
