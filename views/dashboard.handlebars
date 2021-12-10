@@ -9,6 +9,7 @@
             <h5 class="card-title">Click add to add items to your personal list!</h5>
           </div>
         </div>
+        <div type="hidden" class="active-user-id" value="{{userid}}"></div>
         {{#each items as |item|}}
         <div class="card mb-3 overflow-auto">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
@@ -32,14 +33,15 @@
             <div class="col-md-1 common-item">
               <input type="hidden" id="{{item.user_id}}" class="user_id" />
               <input type="hidden" id="{{item.id}}" class="item_id"  />
-              <button type="button" class="btn btn-light btn-lg add mb-2" data-id="{{item.id}}" data-id2="1"> 
-                {{!-- add location from homeroutes to get list_ID --}}
+              <button type="button" class="btn btn-light btn-lg add mb-2" data-id="{{item.id}}"> 
                 Add
               </button>
             </div>
           </div>
         </div>
+        <p>{{item.list.id}}</p>
         {{/each}}
+        
       </div>
       <div class="col-4">
         <div class="card m-2">

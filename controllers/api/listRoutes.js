@@ -14,6 +14,26 @@ router.get('/' , async (req, res) => {
   }
 });
 
+router.get('/:id' , async (req, res) => {
+  try {
+    const listData = await List.findOne({
+      where: {
+        user_id: req.params.id
+      },
+      include: [
+        { model: User }
+      ],
+    });
+    const lists = listData.get({ plain: true });
+    console.log(lists)
+    //Change handlebars file name
+    res.status(200).json(lists);
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err);
+  }
+});
+
 router.post('/', async (req, res) => {
   /* req.body should look like this...
     {

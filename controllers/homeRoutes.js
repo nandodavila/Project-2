@@ -130,9 +130,13 @@ router.get('/dashboard', async (req, res) => {
         {
           model: User,
         },
+        {
+          model: List
+        },
       ],
     });
     const items = itemsData.map((item) => item.get({ plain: true }));
+    console.log(items)
     const userListData = await Item.findAll({
       where: {
         user_id: req.session.user_id
@@ -164,17 +168,16 @@ router.get('/dashboard', async (req, res) => {
       ],
     })
     const list = listData.get({ plain: true });
-    // const listId = list.id
-    const listObj = 
     console.log(list)
   
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
       items,
-      listObj,
+      list,
       logged_in: req.session.logged_in,
-      name: req.session.username
+      name: req.session.username,
+      userid: req.session.user_id
     });
   } catch (err) {
     res.status(500).json(err);
