@@ -53,7 +53,6 @@ router.get('/search/:search', async (req, res) => {
     if (userData.length == 0) {
       return res.status(500).json(err)
     } else {
-      console.log(userData)
       const user = userData.map((user) => user.get({ plain: true }))
       res.status(200).json({user})
     }
@@ -103,14 +102,13 @@ router.get('/profile/:username', async (req, res) => {
 
 
 router.get('/updateitem/:id', async (req, res) => {
-  console.log("id "+ req.params.id);
+  
   try {
-    const currentItemsData = await Item.findByPk(req.params.id, {
-      include: [
-        {
-          model: User,
-        },
-      ],
+
+    const currentItemsData = await Item.findByPk(req.params.id,{
+      include:[{
+        model: User,
+      }],
     });
     const currentItem = currentItemsData.get({ plain: true });
     //Change handlebars file name
@@ -119,7 +117,7 @@ router.get('/updateitem/:id', async (req, res) => {
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    console.log(err);
+    
     res.status(500).json(err);
   }
 });
@@ -143,20 +141,48 @@ router.get('/dashboard', async (req, res) => {
         {
           model: User,
         },
+        {
+          model: List
+        },
       ],
     })
-
+    
+   
     const userLists = userListData.map((items) => items.get({ plain: true }));
+
+     const listData = await List.findOne({
+      where: {
+        user_id: req.session.user_id
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Item
+        }
+      ],
+    })
+    const list = listData.get({ plain: true });
+    // const listId = list.id
+    const listObj = 
+    console.log(list)
+  
     //Change handlebars file name
     res.render('dashboard', {
       userLists,
       items,
+      listObj,
       logged_in: req.session.logged_in,
       name: req.session.username
     });
   } catch (err) {
     res.status(500).json(err);
   }
+
+  
 });
+
+
 
 module.exports = router;
