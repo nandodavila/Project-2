@@ -38,23 +38,23 @@
             <h4>{{userName}}'s Wish List!</h4>
           </div>
         </div>
-        {{#each userLists as |userList|}}
+        {{#each list.items as |item|}}
         <div class="card m-2">
           <div class="row g-0 d-flex align-items-center" style="height: 10rem">
             <div class="col-md-2">
-              <img src="{{userList.img_link}}" class="img-fluid rounded-start" alt="..." />
+              <img src="{{item.img_link}}" class="img-fluid rounded-start" alt="..." />
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title card-title-overflow">{{userList.item_name}}</h5>
-                <p class="card-text card-description-overflow">{{userList.description}}</p>
+                <h5 class="card-title card-title-overflow">{{item.item_name}}</h5>
+                <p class="card-text card-description-overflow">{{item.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
               <div class="card-body">
-                <a href="{{userList.purchase_link}}">Purchase Link</a>
+                <a href="{{item.purchase_link}}">Purchase Link</a>
                 <p class="card-text">
-                  <small class="text-muted">Added by: {{userList.user.username}}</small>
+                  <small class="text-muted">Added by: {{item.user.username}}</small>
                 </p>
               </div>
             </div>

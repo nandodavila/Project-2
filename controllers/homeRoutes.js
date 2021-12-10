@@ -63,20 +63,20 @@ router.get('/search/:search', async (req, res) => {
 
 router.get('/profile/:username', async (req, res) => {
   try {
-    const userData = await User.findAll({
-    where: {
-      username: req.params.username
-    },
-    include: [
-      {
-        model: List,
+    const userData = await User.findOne({
+      where: {
+        username: req.params.username
       },
-      {
-        model: Item,
-      }
-    ],
-  });
-  const user = userData.map((user) => user.get({ plain: true }));
+      include: [
+        {
+          model: List,
+        },
+        {
+          model: Item,
+        }
+      ],
+    });
+    const user = userData.get({ plain: true });
 
     const itemsData = await Item.findAll({
       include: [
@@ -87,10 +87,25 @@ router.get('/profile/:username', async (req, res) => {
     });
     const items = itemsData.map((item) => item.get({ plain: true }));
 
-    
-    //Change handlebars file name
+    const listData = await List.findOne({
+      where: {
+        user_id: user.id
+      },
+      include: [
+        {
+          model: User,
+        },
+        {
+          model: Item,
+        }
+      ],
+    });
+    const list = listData.get({ plain: true });
+    console.log(list)
+
     res.render('otheruser', {
       user,
+      list,
       items,
       userName: req.params.username,
       logged_in: req.session.logged_in
