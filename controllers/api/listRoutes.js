@@ -116,7 +116,6 @@ router.put('/delete/:id' , async (req, res) => {
 
       // filter existarray to find the id to be removed and return new list
       filtered = existarray.filter(id => id != itemId)
-      console.log(filtered)
     } 
 
     // make a body to update List
