@@ -78,6 +78,15 @@ router.get('/profile/:username', async (req, res) => {
     });
     const user = userData.get({ plain: true });
 
+    const itemsData = await Item.findAll({
+      include: [
+        {
+          model: User,
+        },
+      ],
+    });
+    const items = itemsData.map((item) => item.get({ plain: true }));
+
     const listData = await List.findOne({
       where: {
         user_id: user.id
@@ -93,6 +102,7 @@ router.get('/profile/:username', async (req, res) => {
     res.render('otheruser', {
       user,
       list,
+      items,
       userName: req.params.username,
       logged_in: req.session.logged_in
     });
