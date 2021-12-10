@@ -21,9 +21,6 @@ const addItemToList = async (event) => {
 };
 
 
-
-
-
 document
   .querySelector('.add')
   .addEventListener('submit', addItemToList);
