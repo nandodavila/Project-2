@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
 
 router.put('/add/:id' , async (req, res) => {
   // req.params.id should look like this,
-  // api/list/add/${listId}&${itemId}
+  // ${listId}&${itemId}
 
   // split req.params.id to be usable
   const params = req.params.id
@@ -93,7 +93,7 @@ router.put('/add/:id' , async (req, res) => {
 
 router.put('/delete/:id' , async (req, res) => {
   // req.params.id should look like this,
-  // api/list/add/${listId}&${itemId}
+  // ${listId}&${itemId}
 
   // split req.params.id to be usable
   const params = req.params.id
@@ -146,6 +146,5 @@ router.put('/delete/:id' , async (req, res) => {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;
