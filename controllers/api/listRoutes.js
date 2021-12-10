@@ -46,12 +46,15 @@ router.put('/add/:id' , async (req, res) => {
   const split = params.split("&")
   const listId = split[0]
   const itemId = split[1]
+  console.log(listId)
+  console.log(itemId)
 
   try {
     // find users list with listId
     const listData = await List.findByPk(listId, {
       include: [{ model: User },{ model: Item }],
     });
+    console.log(listData)
     const list = listData.get({ plain: true });
     console.log(list)
     console.log(list.items)
@@ -94,8 +97,10 @@ router.put('/add/:id' , async (req, res) => {
 
     res.status(200).json(newListItem);
   } catch (err) {
+    console.error(err)
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
