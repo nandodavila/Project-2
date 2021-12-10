@@ -8,9 +8,7 @@ const addItemToList = async (event) => {
     const userIdValue = userId.getAttribute("value")
     const responseList = await fetch(`/api/list/${userIdValue}`);
     const list = await responseList.json();
-    console.log(list)
     const list_id = list.id
-    console.log(list_id)
 
 
     const responsePut = await fetch(`/api/list/add/${list_id}&${item_id}`, {
@@ -21,7 +19,7 @@ const addItemToList = async (event) => {
           if (responsePut.ok) {
                 document.location.replace('/dashboard');
               } else {
-                alert('Failed to add item.');
+                alert('Failed to add item or you added item.');
               }
     };
 
@@ -56,3 +54,33 @@ const editForUser = () => {
 }
 
 editForUser();
+
+const deleteItemFromList = async (event) => {
+
+  event.preventDefault();
+
+
+  const item_id = event.target.getAttribute('data-id');
+  const userId = document.querySelector(".active-user-id")
+  const userIdValue = userId.getAttribute("value")
+  const responseList = await fetch(`/api/list/${userIdValue}`);
+  const list = await responseList.json();
+  const list_id = list.id
+
+
+
+  const responsePut = await fetch(`/api/list/delete/${list_id}&${item_id}`, {
+      method: 'PUT',        
+      headers: { 'Content-Type': 'application/json' },
+      });
+        
+        if (responsePut.ok) {
+              document.location.replace('/dashboard');
+            } else {
+              alert('Failed remove item from your list');
+            }
+  };
+
+  document
+  .querySelectorAll('.delete').forEach(item => {
+    item.addEventListener('click', deleteItemFromList)})
