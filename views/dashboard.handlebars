@@ -17,8 +17,8 @@
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{item.item_name}}</h5>
-                <p class="card-text">{{item.description}}</p>
+                <h5 class="card-title card-title-overflow">{{item.item_name}}</h5>
+                <p class="card-text card-description-overflow">{{item.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
@@ -32,7 +32,7 @@
             <div class="col-md-1 common-item">
               <input type="hidden" id="{{item.user_id}}" class="user_id" />
               <input type="hidden" id="{{item.id}}" class="item_id"  />
-              <button type="button" class="btn btn-primary btn-lg add" data-id="{{item.id}}" data-id2="1"> 
+              <button type="button" class="btn btn-light btn-lg add" data-id="{{item.id}}" data-id2="1"> 
                 {{!-- add location from homeroutes to get list_ID --}}
                 Add
               </button>
@@ -58,8 +58,8 @@
             </div>
             <div class="col-md-6">
               <div class="card-body">
-                <h5 class="card-title">{{userList.item_name}}</h5>
-                <p class="card-text">{{userList.description}}</p>
+                <h5 class="card-title card-title-overflow">{{userList.item_name}}</h5>
+                <p class="card-text card-description-overflow">{{userList.description}}</p>
               </div>
             </div>
             <div class="col-md-2">
@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="col-md-1">
-              <button type="button" class="btn btn-primary btn-lg">
+              <button type="button" class="btn shadow-sm btn-light btn-lg">
                 Edit
               </button>
             </div>
@@ -80,10 +80,10 @@
         {{/each}}
       </div>
       <div class="col-4">
-        <div class="card">
+        <div class="card m-2">
           <div class="card-body d-flex flex-column justify-content-center">
             <h5 class="card-title text-center username">{{name}}</h5>
-            <a href="/additem" class="btn btn-primary">Add an item</a>
+            <a href="/additem" class="btn shadow-sm btn-light">Add an item</a>
           </div>
         </div>
       </div>

@@ -1,0 +1,38 @@
+:root {
+  --main-dark-green: rgb(30, 64, 40);
+  --main-white: rgb(237, 236, 237);
+  --main-red: rgb(160, 37, 37);
+  --light-green: rgb(185, 215, 198);
+  --dark: rgb(24 24 24);
+}
+
+body {
+  background-color: var(--main-dark-green);
+  color: rgb(237, 236, 237);
+}
+
+.card {
+  background-color: var(--light-green);
+  color: var(--dark);
+}
+
+.bg-primary {
+  background-color: var(--main-red) !important;
+}
+
+.bg-danger {
+  background-color: var(--main-dark-green) !important;
+  color: var(--main-dark-green) !important;
+}
+
+.card-title-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5ex;
+}
+
+.card-description-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 5.5ex;
+}

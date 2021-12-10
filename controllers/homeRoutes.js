@@ -71,6 +71,9 @@ router.get('/profile/:username', async (req, res) => {
       {
         model: List,
       },
+      {
+        model: Item,
+      }
     ],
   });
   const user = userData.map((user) => user.get({ plain: true }));
@@ -89,6 +92,7 @@ router.get('/profile/:username', async (req, res) => {
     res.render('otheruser', {
       user,
       items,
+      userName: req.params.username,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -100,6 +104,7 @@ router.get('/profile/:username', async (req, res) => {
 router.get('/updateitem/:id', async (req, res) => {
   
   try {
+
     const currentItemsData = await Item.findByPk(req.params.id,{
       include:[{
         model: User,
