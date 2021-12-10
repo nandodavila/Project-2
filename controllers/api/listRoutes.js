@@ -1,8 +1,6 @@
 const router = require('express').Router();
 const { List, User, Item, ListItem } = require('../../models');
 
-
-
 router.get('/' , async (req, res) => {
   try {
     const listData = await List.findAll({
@@ -20,7 +18,6 @@ router.post('/', async (req, res) => {
   /* req.body should look like this...
     {
       user_id:,
-      itemIds: [1, 2, 3, 4]
     }
   */
   try {
@@ -36,32 +33,23 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/add/:id' , async (req, res) => {
-  /* req.body should look like this...
-    {
-      user_id:,
-      itemIds: [1, 2, 3, 4]
-    }
-  */
+  // req.params.id should look like this,
+  // api/list/add/${listId}&${itemId}
 
-  // split params to be usable
+  // split req.params.id to be usable
   const params = req.params.id
   const split = params.split("&")
   const listId = split[0]
   const itemId = split[1]
-  console.log(listId)
-  console.log(itemId)
 
   try {
     // find users list with listId
     const listData = await List.findByPk(listId, {
       include: [{ model: User },{ model: Item }],
     });
-    console.log(listData)
     const list = listData.get({ plain: true });
-    console.log(list)
-    console.log(list.items)
-    // assign variable to existarray and push item
 
+    // assign variable to existarray and push item
     let existarray
 
     if (list.items) {
@@ -72,7 +60,6 @@ router.put('/add/:id' , async (req, res) => {
       existarray.push(itemId)
     }
     
-    console.log(existarray)
     // make a body for new List
     const newbody = {
       id: list.id,
@@ -100,6 +87,56 @@ router.put('/add/:id' , async (req, res) => {
     res.status(200).json(newListItem);
   } catch (err) {
     console.error(err)
+    res.status(500).json(err);
+  }
+});
+
+router.put('/delete/:id' , async (req, res) => {
+  // req.params.id should look like this,
+  // api/list/add/${listId}&${itemId}
+
+  // split req.params.id to be usable
+  const params = req.params.id
+  const split = params.split("&")
+  const listId = split[0]
+  const itemId = split[1]
+
+  try {
+    // find users list with listId
+    const listData = await List.findByPk(listId, {
+      include: [{ model: User },{ model: Item }],
+    });
+    const list = listData.get({ plain: true });
+
+    // assign variable to existarray and push item
+    let existarray
+
+    if (list.items) {
+      existarray = list.items
+
+      // filter existarray to find the id to be removed and return new list
+    } 
+
+    // make a body for new List
+    const newbody = {
+      id: list.id,
+      user_id: list.user_id,
+      items: existarray
+    }
+
+    // create new List with newbody
+    const updatedList = await List.update(newbody, {
+      where: {
+        id: listId,
+      },
+      include: [{ model: User },{ model: Item }],
+    })
+
+    // destroy list item that matches itemId
+    const newListItem = await ListItem.destroy()
+
+    res.status(200).json(lists);
+  } catch (err) {
     res.status(500).json(err);
   }
 });
