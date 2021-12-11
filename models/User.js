@@ -7,7 +7,7 @@ class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
   }
-};
+}
 
 User.init(
   {
@@ -36,7 +36,7 @@ User.init(
       validate: {
         len: [8],
       },
-    }
+    },
   },
   {
     hooks: {
@@ -45,7 +45,10 @@ User.init(
         return newUserData;
       },
       beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        updatedUserData.password = await bcrypt.hash(
+          updatedUserData.password,
+          10
+        );
         return updatedUserData;
       },
     },

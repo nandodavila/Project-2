@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class List extends Model {};
+class List extends Model {}
 
 List.init(
   {
@@ -17,15 +17,15 @@ List.init(
       references: {
         model: 'user',
         key: 'id',
-      }
-    }
+      },
+    },
   },
   {
-  sequelize,
-  timestamps: false,
-  freezeTableName: true,
-  underscored: true,
-  modelName: 'list',
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'list',
   }
 );
 
