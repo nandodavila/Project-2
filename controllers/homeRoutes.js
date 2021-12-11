@@ -169,7 +169,8 @@ router.get('/dashboard', async (req, res) => {
           model: User,
         },
         {
-          model: Item
+          model: Item,
+          include:[ {model: User} ]
         }
       ],
     });
