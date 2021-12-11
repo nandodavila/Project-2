@@ -1,12 +1,12 @@
 const router = require('express').Router();
-const { User, List} = require('../../models');
+const { User, List } = require('../../models');
 
 router.get('/:username', async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
-        username: req.params.username
-      }
+        username: req.params.username,
+      },
     });
 
     res.status(200).json(userData);
@@ -20,15 +20,15 @@ router.post('/', async (req, res) => {
     const userData = await User.create(req.body);
 
     const listBody = {
-      user_id: userData.id
+      user_id: userData.id,
     };
 
     await List.create(listBody, {
-      include: [{ model: User }]
+      include: [{ model: User }],
     });
 
     req.session.save(() => {
-      req.session.username = userData.username
+      req.session.username = userData.username;
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
-    };
+    }
 
     const validPassword = await userData.checkPassword(req.body.password);
 
@@ -58,10 +58,10 @@ router.post('/login', async (req, res) => {
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
-    };
+    }
 
     req.session.save(() => {
-      req.session.username = userData.username
+      req.session.username = userData.username;
       req.session.user_id = userData.id;
       req.session.logged_in = true;
 
@@ -79,7 +79,7 @@ router.post('/logout', (req, res) => {
     });
   } else {
     res.status(404).end();
-  };
+  }
 });
 
 module.exports = router;

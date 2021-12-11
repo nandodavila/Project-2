@@ -3,7 +3,6 @@ const List = require('../models/List');
 const User = require('../models/User');
 const Item = require('../models/Item');
 
-
 const userData = require('./userData.json');
 const itemData = require('./itemData.json');
 
