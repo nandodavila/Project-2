@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const { List, User, Item, ListItem } = require('../../models');
 
-router.get('/' , async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const listData = await List.findAll({
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
     const lists = listData.map((lists) => lists.get({ plain: true }));
 
@@ -14,21 +14,19 @@ router.get('/' , async (req, res) => {
   }
 });
 
-router.get('/:id' , async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const listData = await List.findOne({
       where: {
-        user_id: req.params.id
+        user_id: req.params.id,
       },
-      include: [
-        { model: User }
-      ],
+      include: [{ model: User }],
     });
     const lists = listData.get({ plain: true });
 
     res.status(200).json(lists);
   } catch (err) {
-    console.error(err)
+    console.error(err);
     res.status(500).json(err);
   }
 });
@@ -36,7 +34,7 @@ router.get('/:id' , async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const listData = await List.create(req.body, {
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
     const lists = listData.get({ plain: true });
 
@@ -46,36 +44,36 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/add/:id' , async (req, res) => {
+router.put('/add/:id', async (req, res) => {
   // split req.params.id to be usable
-  const params = req.params.id
-  const split = params.split("&")
-  const listId = split[0]
-  const itemId = split[1]
+  const params = req.params.id;
+  const split = params.split('&');
+  const listId = split[0];
+  const itemId = split[1];
 
   try {
     // find list with matching listId
     const listData = await List.findByPk(listId, {
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
     const list = listData.get({ plain: true });
 
     // get existing item array and add new itemId to it
-    let existarray
+    let existarray;
 
     if (list.items) {
-      existarray = list.items
-      existarray.push(itemId)
+      existarray = list.items;
+      existarray.push(itemId);
     } else {
-      existarray = []
-      existarray.push(itemId)
+      existarray = [];
+      existarray.push(itemId);
     }
-    
+
     // make a body to update List
     const newbody = {
       id: list.id,
       user_id: list.user_id,
-      items: existarray
+      items: existarray,
     };
 
     // update List with body
@@ -83,7 +81,7 @@ router.put('/add/:id' , async (req, res) => {
       where: {
         id: listId,
       },
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
 
     // make a body for new ListItem
@@ -97,40 +95,40 @@ router.put('/add/:id' , async (req, res) => {
 
     res.status(200).json(newListItem);
   } catch (err) {
-    console.error(err)
+    console.error(err);
     res.status(500).json(err);
   }
 });
 
-router.put('/delete/:id' , async (req, res) => {
+router.put('/delete/:id', async (req, res) => {
   // split req.params.id to be usable
-  const params = req.params.id
-  const split = params.split("&")
-  const listId = split[0]
-  const itemId = split[1]
+  const params = req.params.id;
+  const split = params.split('&');
+  const listId = split[0];
+  const itemId = split[1];
 
   try {
     // find list with matching listId
     const listData = await List.findByPk(listId, {
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
     const list = listData.get({ plain: true });
 
     // get existing item array and filter to remove itemId
-    let filtered
+    let filtered;
 
     if (list.items) {
-      let existarray = list.items
+      let existarray = list.items;
 
       // filter existarray to find the id to be removed and return new list
-      filtered = existarray.filter(id => id != itemId)
-    }; 
+      filtered = existarray.filter((id) => id != itemId);
+    }
 
     // make a body to update List
     const newbody = {
       id: list.id,
       user_id: list.user_id,
-      items: filtered
+      items: filtered,
     };
 
     // update List with body
@@ -138,18 +136,18 @@ router.put('/delete/:id' , async (req, res) => {
       where: {
         id: listId,
       },
-      include: [{ model: User },{ model: Item }],
+      include: [{ model: User }, { model: Item }],
     });
 
     // destroy ListItem that matches itemId and listId
     const destroyListItem = await ListItem.destroy({
       where: {
         list_id: listId,
-        item_id: itemId
-      }
+        item_id: itemId,
+      },
     });
 
-    res.status(200).json({ message: "Item removed from list!"});
+    res.status(200).json({ message: 'Item removed from list!' });
   } catch (err) {
     res.status(500).json(err);
   }

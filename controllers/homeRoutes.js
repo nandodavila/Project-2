@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const { User, ListItem, Item, List} = require('../models');
-const { Op } = require("sequelize");
+const { User, ListItem, Item, List } = require('../models');
+const { Op } = require('sequelize');
 
 router.get('/', async (req, res) => {
   try {
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
 
     res.render('homepage', {
       items,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 
 router.get('/additem', (req, res) => {
   res.render('additem', {
-    logged_in: req.session.logged_in
+    logged_in: req.session.logged_in,
   });
 });
 
@@ -32,7 +32,7 @@ router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
     return;
-  };
+  }
 
   res.render('login-signup');
 });
@@ -42,18 +42,18 @@ router.get('/search/:search', async (req, res) => {
     const userData = await User.findAll({
       where: {
         [Op.or]: [
-          { username: req.params.search }, 
-          { email: req.params.search }
-        ]  
+          { username: req.params.search },
+          { email: req.params.search },
+        ],
       },
     });
 
     if (userData.length == 0) {
-      return res.status(500).json(err)
+      return res.status(500).json(err);
     } else {
-      const user = userData.map((user) => user.get({ plain: true }))
-      res.status(200).json({user})
-    };
+      const user = userData.map((user) => user.get({ plain: true }));
+      res.status(200).json({ user });
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -63,7 +63,7 @@ router.get('/profile/:username', async (req, res) => {
   try {
     const userData = await User.findOne({
       where: {
-        username: req.params.username
+        username: req.params.username,
       },
       include: [
         {
@@ -71,7 +71,7 @@ router.get('/profile/:username', async (req, res) => {
         },
         {
           model: Item,
-        }
+        },
       ],
     });
     const user = userData.get({ plain: true });
@@ -87,7 +87,7 @@ router.get('/profile/:username', async (req, res) => {
 
     const listData = await List.findOne({
       where: {
-        user_id: user.id
+        user_id: user.id,
       },
       include: [
         {
@@ -95,7 +95,7 @@ router.get('/profile/:username', async (req, res) => {
         },
         {
           model: Item,
-        }
+        },
       ],
     });
     const list = listData.get({ plain: true });
@@ -105,7 +105,7 @@ router.get('/profile/:username', async (req, res) => {
       list,
       items,
       userName: req.params.username,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -114,16 +114,18 @@ router.get('/profile/:username', async (req, res) => {
 
 router.get('/updateitem/:id', async (req, res) => {
   try {
-    const currentItemsData = await Item.findByPk(req.params.id,{
-      include:[{
-        model: User,
-      }],
+    const currentItemsData = await Item.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+        },
+      ],
     });
     const currentItem = currentItemsData.get({ plain: true });
 
     res.render('updateitem', {
       currentItem,
-      logged_in: req.session.logged_in
+      logged_in: req.session.logged_in,
     });
   } catch (err) {
     res.status(500).json(err);
@@ -138,50 +140,50 @@ router.get('/dashboard', async (req, res) => {
           model: User,
         },
         {
-          model: List
+          model: List,
         },
       ],
     });
     const items = itemsData.map((item) => item.get({ plain: true }));
-    
+
     const userListData = await Item.findAll({
       where: {
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
       },
       include: [
         {
           model: User,
         },
         {
-          model: List
+          model: List,
         },
       ],
     });
-    
+
     const userLists = userListData.map((items) => items.get({ plain: true }));
 
     const listData = await List.findOne({
       where: {
-        user_id: req.session.user_id
+        user_id: req.session.user_id,
       },
       include: [
         {
           model: User,
         },
         {
-          model: Item
-        }
+          model: Item,
+        },
       ],
     });
     const list = listData.get({ plain: true });
-  
+
     res.render('dashboard', {
       userLists,
       items,
       list,
       logged_in: req.session.logged_in,
       name: req.session.username,
-      userid: req.session.user_id
+      userid: req.session.user_id,
     });
   } catch (err) {
     res.status(500).json(err);

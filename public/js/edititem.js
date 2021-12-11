@@ -7,10 +7,15 @@ const editItemHandler = async (event) => {
   const user_id = document.querySelector('#user_id').value.trim();
 
   if (item_name && description && purchase_link) {
-
     const response = await fetch('/api/item/:id', {
       method: 'PUT',
-      body: JSON.stringify({ item_name, description, img_link, purchase_link, user_id }),
+      body: JSON.stringify({
+        item_name,
+        description,
+        img_link,
+        purchase_link,
+        user_id,
+      }),
       headers: { 'Content-Type': 'application/json' },
     });
 
