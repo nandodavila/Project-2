@@ -5,10 +5,10 @@
   ### Table of Contents
   **[Description](#description)**<br>
   **[Usage](#usage)**<br>
-  **[License](#license)**<br>
   **[Contributing](#contributing)**<br>
-  **[Tests](#tests)**<br>
-  **[Questions](#Questions)**<br>
+  **[Questions](#questions)**<br>
+  **[Link](#link)**<br>
+  **[Example](#example)**<br>
   
 
   ## Description 
