@@ -25,21 +25,15 @@ router.get('/:id' , async (req, res) => {
       ],
     });
     const lists = listData.get({ plain: true });
-    console.log(lists)
-    //Change handlebars file name
+
     res.status(200).json(lists);
   } catch (err) {
-    console.log(err)
+    console.error(err)
     res.status(500).json(err);
   }
 });
 
 router.post('/', async (req, res) => {
-  /* req.body should look like this...
-    {
-      user_id:,
-    }
-  */
   try {
     const listData = await List.create(req.body, {
       include: [{ model: User },{ model: Item }],
@@ -53,9 +47,6 @@ router.post('/', async (req, res) => {
 });
 
 router.put('/add/:id' , async (req, res) => {
-  // req.params.id should look like this,
-  // ${listId}&${itemId}
-
   // split req.params.id to be usable
   const params = req.params.id
   const split = params.split("&")
@@ -85,7 +76,7 @@ router.put('/add/:id' , async (req, res) => {
       id: list.id,
       user_id: list.user_id,
       items: existarray
-    }
+    };
 
     // update List with body
     const updatedList = await List.update(newbody, {
@@ -93,16 +84,16 @@ router.put('/add/:id' , async (req, res) => {
         id: listId,
       },
       include: [{ model: User },{ model: Item }],
-    })
+    });
 
     // make a body for new ListItem
     const listItemBody = {
       list_id: listId,
       item_id: itemId,
-    }
+    };
 
     // create new ListItem
-    const newListItem = await ListItem.create(listItemBody)
+    const newListItem = await ListItem.create(listItemBody);
 
     res.status(200).json(newListItem);
   } catch (err) {
@@ -112,9 +103,6 @@ router.put('/add/:id' , async (req, res) => {
 });
 
 router.put('/delete/:id' , async (req, res) => {
-  // req.params.id should look like this,
-  // ${listId}&${itemId}
-
   // split req.params.id to be usable
   const params = req.params.id
   const split = params.split("&")
@@ -136,14 +124,14 @@ router.put('/delete/:id' , async (req, res) => {
 
       // filter existarray to find the id to be removed and return new list
       filtered = existarray.filter(id => id != itemId)
-    } 
+    }; 
 
     // make a body to update List
     const newbody = {
       id: list.id,
       user_id: list.user_id,
       items: filtered
-    }
+    };
 
     // update List with body
     const updatedList = await List.update(newbody, {
@@ -151,7 +139,7 @@ router.put('/delete/:id' , async (req, res) => {
         id: listId,
       },
       include: [{ model: User },{ model: Item }],
-    })
+    });
 
     // destroy ListItem that matches itemId and listId
     const destroyListItem = await ListItem.destroy({
@@ -159,7 +147,7 @@ router.put('/delete/:id' , async (req, res) => {
         list_id: listId,
         item_id: itemId
       }
-    })
+    });
 
     res.status(200).json({ message: "Item removed from list!"});
   } catch (err) {
