@@ -58,7 +58,7 @@ router.post('/login', async (req, res) => {
         .status(400)
         .json({ message: 'Incorrect email or password, please try again' });
       return;
-    }
+    };
 
     req.session.save(() => {
       req.session.username = userData.username
@@ -79,7 +79,7 @@ router.post('/logout', (req, res) => {
     });
   } else {
     res.status(404).end();
-  }
+  };
 });
 
 module.exports = router;

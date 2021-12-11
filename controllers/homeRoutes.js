@@ -130,7 +130,6 @@ router.get('/updateitem/:id', async (req, res) => {
   }
 });
 
-// what an authed user sees to update their own list and add items
 router.get('/dashboard', async (req, res) => {
   try {
     const itemsData = await Item.findAll({
