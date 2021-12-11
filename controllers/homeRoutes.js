@@ -172,7 +172,8 @@ router.get('/dashboard', async (req, res) => {
         },
         {
           model: Item,
-        },
+          include:[ {model: User} ]
+        }
       ],
     });
     const list = listData.get({ plain: true });
