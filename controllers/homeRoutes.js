@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
       ],
     });
     const items = itemsData.map((item) => item.get({ plain: true }));
-    //Change handlebars file name
+
     res.render('homepage', {
       items,
       logged_in: req.session.logged_in
@@ -32,14 +32,12 @@ router.get('/login-signup', (req, res) => {
   if (req.session.logged_in) {
     res.redirect('/');
     return;
-  }
+  };
 
   res.render('login-signup');
 });
 
-
 router.get('/search/:search', async (req, res) => {
-
   try {
     const userData = await User.findAll({
       where: {
@@ -49,13 +47,13 @@ router.get('/search/:search', async (req, res) => {
         ]  
       },
     });
-    console.log(userData.length)
+
     if (userData.length == 0) {
       return res.status(500).json(err)
     } else {
       const user = userData.map((user) => user.get({ plain: true }))
       res.status(200).json({user})
-    }
+    };
   } catch (err) {
     res.status(500).json(err);
   }
@@ -101,7 +99,6 @@ router.get('/profile/:username', async (req, res) => {
       ],
     });
     const list = listData.get({ plain: true });
-    console.log(list)
 
     res.render('otheruser', {
       user,
@@ -115,24 +112,20 @@ router.get('/profile/:username', async (req, res) => {
   }
 });
 
-
 router.get('/updateitem/:id', async (req, res) => {
-  
   try {
-
     const currentItemsData = await Item.findByPk(req.params.id,{
       include:[{
         model: User,
       }],
     });
     const currentItem = currentItemsData.get({ plain: true });
-    //Change handlebars file name
+
     res.render('updateitem', {
       currentItem,
       logged_in: req.session.logged_in
     });
   } catch (err) {
-    
     res.status(500).json(err);
   }
 });
@@ -151,7 +144,7 @@ router.get('/dashboard', async (req, res) => {
       ],
     });
     const items = itemsData.map((item) => item.get({ plain: true }));
-    console.log(items)
+    
     const userListData = await Item.findAll({
       where: {
         user_id: req.session.user_id
@@ -164,12 +157,11 @@ router.get('/dashboard', async (req, res) => {
           model: List
         },
       ],
-    })
+    });
     
-   
     const userLists = userListData.map((items) => items.get({ plain: true }));
 
-     const listData = await List.findOne({
+    const listData = await List.findOne({
       where: {
         user_id: req.session.user_id
       },
@@ -181,11 +173,9 @@ router.get('/dashboard', async (req, res) => {
           model: Item
         }
       ],
-    })
+    });
     const list = listData.get({ plain: true });
-    console.log(list)
   
-    //Change handlebars file name
     res.render('dashboard', {
       userLists,
       items,
@@ -197,10 +187,6 @@ router.get('/dashboard', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-
-  
 });
-
-
 
 module.exports = router;
