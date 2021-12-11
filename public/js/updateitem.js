@@ -8,12 +8,14 @@ const updateItemFormHandler = async (event) => {
     const user_id = document.querySelector('#user_id').getAttribute('data-id');
     const item_id = event.target.id;
     
+    
     if (item_name || description || purchase_link || img_link ) {
         const response = await fetch(`/api/item/${item_id}`, {
             method: 'PUT',
             body: JSON.stringify({ item_name, description, img_link, purchase_link, user_id}),
             headers: { 'Content-Type': 'application/json' },
         });
+        console.log(response)
       
         if (response.ok) {
             document.location.replace('/');

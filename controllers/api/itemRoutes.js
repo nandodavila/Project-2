@@ -63,8 +63,12 @@ router.put('/:id',withAuth, async (req, res) => {
       img_link: req.body.img_link,
       purchase_link: req.body.purchase_link,
       user_id: req.body.user_id
-    });
-
+    }, 
+    {
+      where: {
+        id: req.params.id,
+    }},
+    );
     res.status(200).json(updateItemItem);
   } catch (err) {
     console.error(err);
