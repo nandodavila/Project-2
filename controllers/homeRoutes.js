@@ -95,6 +95,7 @@ router.get('/profile/:username', async (req, res) => {
         },
         {
           model: Item,
+          include:[ {model: User} ]
         },
       ],
     });
